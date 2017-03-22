@@ -4,7 +4,7 @@
   "description": "template for node exercises",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon main.js"
   },
   "repository": {
     "type": "git",
