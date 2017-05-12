@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 const monthlyBudgetSchema = {
   month: {
-     type: Date,
+     type: String,
      required: true,
   },
   expenses: [Number]
@@ -15,7 +15,6 @@ const userSchema = {
     type: String,
     lowercase: true,
     required: true,
-    match: [HTML5_EMAIL_REGEX, 'Please enter a valid email address'],
     index: { unique: true },
   },
   password: {
