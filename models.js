@@ -7,8 +7,7 @@ const monthlyBudgetSchema = {
      type: Date,
      required: true,
   },
-  income: Number,
-  expenses: Number
+  expenses: [Number]
 }
 
 const userSchema = {
@@ -23,11 +22,6 @@ const userSchema = {
     type: String,
     lowercase: true,
     required: true,
-  },
-  name: {
-    first_name: String,
-    last_name: String,
-    required: true
   },
   budgets: [monthlyBudgetSchema]
 }
