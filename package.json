@@ -1,19 +1,26 @@
 {
-  "name": "nodetemplate",
+  "name": "uBudget Capstone",
   "version": "1.0.0",
-  "description": "template for node exercises",
+  "description": "server side for uBudget",
   "main": "main.js",
   "scripts": {
     "start": "nodemon main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/j-West/nodeTemplate.git"
+    "url": "git+https://github.com/j-West/ubudget-db.git"
   },
-  "author": "",
+  "author": "James West",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/j-West/nodeTemplate/issues"
+    "url": "https://github.com/j-West/ubudget-db/issues"
   },
-  "homepage": "https://github.com/j-West/nodeTemplate#readme"
+  "homepage": "https://github.com/j-West/ubudget-db#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.8"
+  }
 }
