@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const router = Router()
 
+const { MonthlyBudget } = require('./models')
 
-router.post(`/api/addBudget`, (req, res, err) => {
+router.post(`/addBudget`, (req, res, err) => {
   MonthlyBudget
   .create(req.body)
   .then((budget) => {
@@ -11,11 +12,11 @@ router.post(`/api/addBudget`, (req, res, err) => {
   .catch(err) 
 })
 
-router.get(`/api/getBudgets`, (req, res, err) => {
+router.get(`/getBudgets`, (req, res, err) => {
   MonthlyBudget
   .find()
-  .then((budget) => {
-    res.send(budget)
+  .then((budgets) => {
+    res.send(budgets)
   })
   .catch(err) 
 })
