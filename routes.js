@@ -1,25 +1,12 @@
 const { Router } = require('express')
 const router = Router()
 
-const { MonthlyBudget } = require('./models')
+const { createBudget, getAllBudgets, signUp } = require('./controllers')
 
-router.post(`/addBudget`, (req, res, err) => {
-  MonthlyBudget
-  .create(req.body)
-  .then((budget) => {
-    res.send("done")
-  })
-  .catch(err) 
-})
+router.post('/signup', signUp)
+router.post(`/addbudget`, createBudget)
+router.get(`/getbudgets`, getAllBudgets)
 
-router.get(`/getBudgets`, (req, res, err) => {
-  MonthlyBudget
-  .find()
-  .then((budgets) => {
-    res.send(budgets)
-  })
-  .catch(err) 
-})
 
 
 module.exports = router
