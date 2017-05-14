@@ -1,10 +1,10 @@
 'use strict'
 
-const auth = require('./dbAuth')
+const { auths } = require('./configs')
 
 const mongoose = require('mongoose')
 
-const MONGODB_URL = `mongodb://${auth.user}:${auth.pw}@ds139761.mlab.com:39761/ubudget`
+const MONGODB_URL = `mongodb://${auths.user}:${auths.pw}@ds139761.mlab.com:39761/ubudget`
 
 mongoose.Promise = Promise
 
