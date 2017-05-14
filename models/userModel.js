@@ -4,30 +4,15 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 
-
-const monthlyBudgetSchema = {
-  monthName: {
-     type: String,
-     required: true,
-  },
-  categories: {
-    type: [String],
-    required: true,
-  },
-  expenses: [Number]
-}
+const { monthlyBudgetSchema } = require('./budgetModel')
 
 const userSchema = new Schema({
   email: {
     type: String,
     lowercase: true,
-    required: true,
     unique: true
   },
-  password: {
-    type: String,
-    required: true
-  },
+  password: String,
   budgets: [monthlyBudgetSchema]
 })
 
@@ -35,9 +20,9 @@ userSchema.pre('save', function(next) {
   const user = this
   console.log(user)
 
-  bcrypt.genSalt(15, (error, salt) => {
+  bcrypt.genSalt(5, (error, salt) => {
     if (error) { return next(error)}
-      
+
     bcrypt.hash(user.password, salt, null, (error, hash) => {
       if (error) { return next(error)}
 
@@ -47,7 +32,13 @@ userSchema.pre('save', function(next) {
   })
 })
 
-const MonthlyBudget = mongoose.model('monthly_budget', monthlyBudgetSchema)
-const User = mongoose.model('User', userSchema)
+userSchema.methods.comparePassword = function(pwToCompare, cb) {
+  bcrypt.compare(pwToCompare, this.password, (error, isMatch) => {
+    if (error) { return cb(error) }
+    cb(null, isMatch)
+  })
+}
 
-module.exports = { User, MonthlyBudget }
+const User = mongoose.model('user', userSchema)
+
+module.exports = User
