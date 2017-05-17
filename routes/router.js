@@ -8,7 +8,7 @@ const { Router } = require('express')
 const router = Router()
 
 const { signUp, signIn } = require('../controllers/userCtrl');
-const { createBudget, getAllBudgets } = require('../controllers/monthlyBudgetCtrl')
+const { createBudget, getUserBudgets, addExpense } = require('../controllers/monthlyBudgetCtrl')
 
 
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -21,8 +21,8 @@ router.get('/', requireAuth, function(req, res) {
 router.post('/signin', requireSignIn, signIn)
 router.post('/signup', signUp);
 router.post('/addbudget', createBudget)
-router.get('/getbudgets', getAllBudgets)
-
+router.get('/getbudgets', getUserBudgets)
+router.get('/addexpense', addExpense)
 
 
 module.exports = router
