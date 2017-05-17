@@ -3,6 +3,7 @@
 const mongoose = require('mongoose')
 
 const { MonthlyBudget } = require('../models/budgetModel')
+const User = require('../models/userModel');
 
 module.exports.createBudget = (req, res, next) => {
     MonthlyBudget
@@ -12,12 +13,25 @@ module.exports.createBudget = (req, res, next) => {
   })
   .catch(error => { next(error) }) 
 }
- 
-module.exports.getAllBudgets = (req, res, next) => {
+
+module.exports.addExpense = (req, res, next) => {
   MonthlyBudget
-  .find()
+  .findOne({ "_creator" : req.body._id, "monthName" : req.body.monthName })
+  .then(budget => {
+    budget.expenses.push(req.body.newExpense)
+    budget.save()
+    .then(updatedBudget => {
+      res.status(200).json({msg: "Success", updatedBudget})
+    })
+  })
+}
+ 
+module.exports.getUserBudgets = (req, res, next) => {
+  MonthlyBudget
+  .find({ "_creator" : req.body.userId })
   .then((budgets) => {
-    res.send(budgets)
+    console.log('budgets', budgets)
+    res.status(200).json(budgets)
   })
   .catch(error => { next(error) }) 
 }
