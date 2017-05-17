@@ -13,12 +13,11 @@ const userSchema = new Schema({
     unique: true
   },
   password: String,
-  budgets: [monthlyBudgetSchema]
+  budgets: [{ type: Schema.Types.ObjectId, ref: 'MonthlyBudget' }]
 })
 
 userSchema.pre('save', function(next) {
   const user = this
-  console.log(user)
 
   bcrypt.genSalt(5, (error, salt) => {
     if (error) { return next(error)}
