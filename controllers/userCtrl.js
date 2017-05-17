@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const { MonthlyBudget } = require('../models/budgetModel')
 const jwt = require('jwt-simple');
 const { config } = require('../config');
 
@@ -8,7 +9,11 @@ const tokenForUser = (user) => {
 }
 
 module.exports.signIn = (req, res, next) => {
-    res.send({ token: tokenForUser(req.user )})
+    MonthlyBudget
+    .find({ "_creator" : req.user._id})
+    .then(budgets => {
+      res.send({ token: tokenForUser(req.user), userId : req.user._id, budgets })
+    })
 }
 
 module.exports.signUp = ({body: { email, password }}, res, next) => {
@@ -31,7 +36,7 @@ module.exports.signUp = ({body: { email, password }}, res, next) => {
         user.save(err => {
             if (err) { return next(err); }
 
-            res.json({ token: tokenForUser(user) });
+            res.json({ token: tokenForUser(user), userId : user._id });
         });
     });
 }
