@@ -9,11 +9,7 @@ const tokenForUser = (user) => {
 }
 
 module.exports.signIn = (req, res, next) => {
-    MonthlyBudget
-    .find({ "_creator" : req.user._id})
-    .then(budgets => {
-      res.send({ token: tokenForUser(req.user), userId : req.user._id, budgets })
-    })
+      res.send({ token: tokenForUser(req.user), userId : req.user._id })
 }
 
 module.exports.signUp = ({body: { email, password }}, res, next) => {
