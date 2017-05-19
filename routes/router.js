@@ -21,8 +21,8 @@ router.get('/', requireAuth, function(req, res) {
 router.post('/signin', requireSignIn, signIn)
 router.post('/signup', signUp);
 router.post('/addbudget', createBudget)
-router.get('/getbudgets', getUserBudgets)
-router.get('/addexpense', addExpense)
+router.post('/getbudgets', getUserBudgets)
+router.post('/addexpense', addExpense)
 
 
 module.exports = router
