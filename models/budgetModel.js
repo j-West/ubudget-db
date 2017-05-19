@@ -8,7 +8,7 @@ const monthlyBudgetSchema = {
     type: Schema.Types.ObjectId, 
     ref: 'User' 
   },
-  monthName: {
+  budgetName: {
      type: String,
      required: true,
   },
