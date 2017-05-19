@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express')
-const { json } = require('body-parser')
+const { json, urlencoded } = require('body-parser')
 const mongoose = require('mongoose')
 const { connect } = require('./database')
 const router = require('./routes/router')
@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000
 const app = express()
 
 app.use(json())
+app.use(urlencoded({ extended: false }))
 app.use(cors())
 app.use("/api/", router)
 

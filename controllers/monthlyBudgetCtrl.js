@@ -15,22 +15,39 @@ module.exports.createBudget = (req, res, next) => {
 }
 
 module.exports.addExpense = (req, res, next) => {
-  MonthlyBudget
-  .findOne({ "_creator" : req.body._id, "monthName" : req.body.monthName })
-  .then(budget => {
-    budget.expenses.push(req.body.newExpense)
-    budget.save()
-    .then(updatedBudget => {
-      res.status(200).json({msg: "Success", updatedBudget})
+  const newExpense = {
+    "expense" : req.body.values.expense,
+    "category" : req.body.values.category      
+  }
+
+  if(req.body.values._id) {
+    newExpense._id = req.body.values._id
+
+    MonthlyBudget
+    .findOneAndUpdate({"_id" : req.body._id, "expenses._id" : req.body.values._id}, { "expenses.$.expense" : req.body.values.expense }, { "new" : true})
+    .then(response => {
+      res.status(200).json({msg: "Success"})
     })
-  })
+    .catch(error => { next(error) })
+  } else {
+      MonthlyBudget
+      .findOne({ "_id" : req.body._id, "budgetName" : req.body.values.month })
+      .then(budget => {
+        budget.expenses.push(newExpense)
+        budget.save()
+        .then(updatedBudget => {
+          res.status(200).json({msg: "Success"})
+        })
+        .catch(error => { next(error) })
+      })
+      .catch(error => { next(error) })
+    }
 }
  
 module.exports.getUserBudgets = (req, res, next) => {
   MonthlyBudget
   .find({ "_creator" : req.body.userId })
   .then((budgets) => {
-    console.log('budgets', budgets)
     res.status(200).json(budgets)
   })
   .catch(error => { next(error) }) 
