@@ -6,6 +6,9 @@
   "scripts": {
     "start": "nodemon main.js"
   },
+    "engines": { 
+    "node": "7.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/j-West/ubudget-db.git"
