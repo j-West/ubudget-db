@@ -7,7 +7,7 @@ const { connect } = require('./database')
 const router = require('./routes/router')
 const cors = require('cors')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 const app = express()
 

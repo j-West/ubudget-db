@@ -9,5 +9,3 @@ const MONGODB_URL = `mongodb://${auths.user}:${auths.pw}@ds139761.mlab.com:39761
 mongoose.Promise = Promise
 
 module.exports.connect = () => mongoose.connect(MONGODB_URL)
-
-
