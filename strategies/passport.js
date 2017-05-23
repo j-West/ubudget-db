@@ -6,7 +6,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const User = require('../models/userModel');
-const { config } = require('../config');
+// const { config } = require('../config');
 
 const localOptions = { usernameField: "email"}
 
