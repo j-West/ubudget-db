@@ -7,9 +7,9 @@ const { connect } = require('./database')
 const router = require('./routes/router')
 const cors = require('cors')
 
-const PORT = process.env.PORT || 8080
-
 const app = express()
+
+app.set('port', (process.env.PORT || 5000));
 
 app.use(json())
 app.use(urlencoded({ extended: false }))
@@ -19,7 +19,7 @@ app.use("/api/", router)
 
 connect()
   .then(() => {
-    app.listen(PORT, () => {
+    app.listen(app.get('port'), () => {
       console.log(`Listening on port ${PORT}`)
     })
   })

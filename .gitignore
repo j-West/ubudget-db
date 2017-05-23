@@ -40,4 +40,5 @@ lib
 .idea
 
 config.js
-
+.env
+REST_CLIENT
