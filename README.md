@@ -3,5 +3,5 @@
 
 Using Node, Express, and Mongo/Mongoose
 
-#### deployed with Heroku
+#### Deployed with Heroku
 #### Mongo database hosted on mLab.com
